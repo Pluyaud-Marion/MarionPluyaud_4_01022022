@@ -10,6 +10,10 @@
 }
 /* Landing Page */
 
+#error-location, #error-firstname, #error-lastname, #error-email, #error-quantity, #error-birthdate {
+  color: red;
+  font-size: 13px;
+}
 body {
   margin: 0;
   display: flex;
@@ -269,10 +273,10 @@ input[data-error]::after {
   transition: 0.3s;
   opacity: 0;
 }
-.checkbox-input {
+.checkbox-input, .checkbox-location {
   display: none;
 }
-.checkbox-input:checked + .checkbox-label .checkbox-icon::after,
+.checkbox-location:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
   opacity: 1;
 }
