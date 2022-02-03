@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
 /*
@@ -50,7 +51,8 @@ function main() {
 ------------- Fonctions ---------------
 */
 
-// eslint-disable-next-line no-unused-vars
+
+
 function editNav() {
 	var x = document.getElementById("myTopnav");
 	if (x.className === "topnav") {
@@ -81,7 +83,8 @@ function submitForm() {
 			//on remplace le contenu de la div .modal par le texte
 			document.querySelector(".modal").innerHTML = "Merci, votre réservation a bien été reçue!";
 			// on remplace la valeur du bouton "c'est parti" par "j'ai compris"
-			buttonSendForm.value = "J'ai compris";
+			buttonSendForm.value = "Fermer";
+			
 			//au click sur le bouton on appelle la fonction pour fermer la modale
 			buttonSendForm.addEventListener("click", closeModal);
 		}
@@ -138,6 +141,38 @@ function checkBirthdate() {
 		document.getElementById("error-birthdate").innerHTML = "Vous devez renseigner votre date de naissance";
 	} else {
 		document.getElementById("error-birthdate").innerHTML = "";
+		const date = birthdateField.value.split("-"); //split autour des - et retourne un tableau avec chaque élémént
+		const year = parseInt(date[0]); // l'année
+		const month = parseInt(date[1]); // le mois
+		const day = parseInt(date[2]); // le jour
+
+		// Récupère l'année, le mois et le jour en cours
+		const dateCurrent = new Date();
+		const yearCurrent = dateCurrent.getFullYear();
+		const monthCurrent = dateCurrent.getMonth();
+		const dayCurrent = dateCurrent.getDate();
+		
+		// calcul de l'age
+		const age = yearCurrent - year;
+	
+		// Si l'utilisateur a - de 12 ans et + de 99 ans
+		if (age  < 12) {
+			document.getElementById("error-birthdate").innerHTML = "Vous devez avoir au moins 12 ans pour vous inscrire";
+		}	else if (age > 99) {
+			document.getElementById("error-birthdate").innerHTML = "Vous devez avoir entre 12 et 99 ans pour vous inscrire";
+		} 
+
+		// si l'utilisateur renseigne une année postérieure à l'année actuelle
+		if (year > yearCurrent) {
+			document.getElementById("error-birthdate").innerHTML = "Il y a une erreur sur la date";
+			// si même année renseignée et mois supérieur
+		} else if(year === yearCurrent && month > monthCurrent ){
+			//si jour supérieur
+			if (day >= dayCurrent) {
+				document.getElementById("error-birthdate").innerHTML = "Il y a une erreur sur la date";
+			}
+		}
+
 		return true;
 	}
 }

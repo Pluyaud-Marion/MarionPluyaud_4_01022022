@@ -18,7 +18,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /* background-image: url("background.png"); */
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -34,6 +34,9 @@ img {
   padding-right: 1rem;
 }
 
+.modal{
+  min-height: 500px;
+}
 .topnav {
   overflow: hidden;
   margin: 3.5%;
@@ -78,6 +81,9 @@ img {
     float: right;
     display: block;
   }
+  .modal{
+    min-height: 300px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -94,15 +100,22 @@ img {
   }
 }
 
-
-
  @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
+  .modal{
+    min-height: 150px;
+  }
+  .topnav a {
+    display: none;
+  }
+  .topnav.responsive .icon {
+    right: 120px;
+    top: 5px;
+  }
+
   .topnav a.icon {
     float: right;
     display: block;
-    /* margin-top: -15px; */
-    
+    margin-top: 0px;
   }
   #myTopnav{
     display: flex;
@@ -113,7 +126,6 @@ img {
     width: 90%;
   }
   .main-navbar a{
-    width: 80%;
     font-size: 15px;
   }
 } 
@@ -495,8 +507,9 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 800px) {
 
+/* jusqu'à 800px */
+@media screen and (max-width: 800px) {
   .hero-headline{
     font-size: 30px;
     white-space: normal;
@@ -538,6 +551,15 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+  .hero-headline {
+    font-size: 4rem;
+  }
+  .hero-content {
+    min-width: 350px;
   }
 }
 
