@@ -36,6 +36,9 @@ img {
 
 .modal{
   min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .topnav {
   overflow: hidden;
@@ -108,8 +111,8 @@ img {
     display: none;
   }
   .topnav.responsive .icon {
-    right: 120px;
     top: 5px;
+    padding-right: 5%;
   }
 
   .topnav a.icon {
@@ -491,6 +494,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
