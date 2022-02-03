@@ -1,19 +1,10 @@
 /* eslint-disable no-undef */
 
-// eslint-disable-next-line no-unused-vars
-function editNav() {
-	var x = document.getElementById("myTopnav");
-	if (x.className === "topnav") {
-		x.className += " responsive";
-	} else {
-		x.className = "topnav";
-	}
-}
-
-// DOM Elements
+/*
+------------- DOM Elements ---------------
+*/
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
-//const formData = document.querySelectorAll(".formData");
 // croix pour fermer la modale
 const closeButton = document.querySelector(".close");
 // bouton formulaire
@@ -28,23 +19,46 @@ const checkBox = document.getElementById("checkbox1");
 //tous les boutons radios
 const buttonsRadio = document.querySelectorAll(".checkbox-location");
 
-// Regex
+/*
+------------- Regex ---------------
+*/
 const regexName = /^[a-zA-ZÀ-ÿ\s_-]{2,60}$/;
 const regexEmail = /^[^@\s]{2,30}@[^@\s]{2,30}\.[^@\s]{2,5}$/;
 const regexNumber = /^[0-9]+$/;
 
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+main();
 
-// au click sur la croix appel de la fonction closeModal
-closeButton.addEventListener("click", closeModal);
+/*
+------------- Fonction principale ---------------
+*/
+function main() {
+	// launch modal event
+	modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// au click sur valider le formulaire appel de fonction verifyForm et submitForm
-buttonSendForm.addEventListener("click", event => {
-	event.preventDefault();
-	verifyForm();
-	submitForm();
-});
+	// au click sur la croix appel de la fonction closeModal
+	closeButton.addEventListener("click", closeModal);
+
+	// au click sur valider le formulaire appel de fonction verifyForm et submitForm
+	buttonSendForm.addEventListener("click", event => {
+		event.preventDefault();
+		verifyForm();
+		submitForm();
+	});
+}
+
+/*
+------------- Fonctions ---------------
+*/
+
+// eslint-disable-next-line no-unused-vars
+function editNav() {
+	var x = document.getElementById("myTopnav");
+	if (x.className === "topnav") {
+		x.className += " responsive";
+	} else {
+		x.className = "topnav";
+	}
+}
 
 // launch modal form
 function launchModal() {
@@ -61,11 +75,7 @@ function closeModal() {
 fonction qui check tous les champs => si tous les champs sont ok, envoi le formulaire et fait afficher message confirmation (+ gestion fermeture de la confirmation au click sur bouton)
 */
 function submitForm() {
-
 	for (button of buttonsRadio) {
-		
-		// if ((firstnameField.value != "") && regexName.test(firstnameField.value) && (lastnameField.value != "") && regexName.test(lastnameField.value) && (emailField.value != "") && regexEmail.test(emailField.value) && (birthdateField.value != "") && (numberTournamentField.value != "") && regexNumber.test(numberTournamentField.value) && checkBox.checked === true && button.checked === true) {
-
 		//Si tous les champs sont ok
 		if (checkFirstname() && checkLastname() && checkEmail() && checkBirthdate() && checkNumberTournament() && checkCheckBox() && checkCity()) {
 			//on remplace le contenu de la div .modal par le texte
@@ -146,23 +156,18 @@ function checkNumberTournament() {
 	}
 }
 
-
 /*
 fonction qui check si un bouton radio est coché et affiche les messages d'erreurs si besoin
 */
 function checkCity() {
-
 	for (button of buttonsRadio) {
-
 		if (button.checked) {
 			document.getElementById("error-location").innerHTML = "";
 			return true;
-	
 		} else {
 			document.getElementById("error-location").innerHTML = "Vous devez choisir une ville";
 		}
 	}
-
 }
 
 /*
@@ -174,7 +179,6 @@ function checkCheckBox() {
 	} else {
 		document.getElementById("error-checkbox").innerHTML = "";
 		return true;
-	
 	}
 }
 
