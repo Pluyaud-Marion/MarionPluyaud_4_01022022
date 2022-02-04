@@ -79,7 +79,7 @@ fonction qui check tous les champs => si tous les champs sont ok, envoi le formu
 function submitForm() {
 	for (button of buttonsRadio) {
 		//Si tous les champs sont ok
-		if (checkFirstname() && checkLastname() && checkEmail() && checkBirthdate() && checkNumberTournament() && checkCheckBox() && checkCity()) {
+		if (checkFirstname() && checkLastname() && checkEmail() && checkBirthdate() && checkDate() && checkNumberTournament() && checkCheckBox() && checkCity()) {
 			//on remplace le contenu de la div .modal par le texte
 			document.querySelector(".modal").innerHTML = "Merci, votre réservation a bien été reçue!";
 			// on remplace la valeur du bouton "c'est parti" par "j'ai compris"
@@ -134,46 +134,72 @@ function checkEmail() {
 }
 
 /*
-fonction qui check le champ birthdate et affiche les messages d'erreurs si besoin
+fonction qui check si le champ birthdate est vide et affiche message d'erreur si besoin
 */
 function checkBirthdate() {
 	if (birthdateField.value === "") {
 		document.getElementById("error-birthdate").innerHTML = "Vous devez renseigner votre date de naissance";
 	} else {
 		document.getElementById("error-birthdate").innerHTML = "";
-		const date = birthdateField.value.split("-"); //split autour des - et retourne un tableau avec chaque élémént
-		const year = parseInt(date[0]); // l'année
-		const month = parseInt(date[1]); // le mois
-		const day = parseInt(date[2]); // le jour
+		return true;
+	}
+}
 
-		// Récupère l'année, le mois et le jour en cours
-		const dateCurrent = new Date();
-		const yearCurrent = dateCurrent.getFullYear();
-		const monthCurrent = dateCurrent.getMonth();
-		const dayCurrent = dateCurrent.getDate();
-		
-		// calcul de l'age
-		const age = yearCurrent - year;
+/*
+fonction qui check la cohérence du champ birthdate et affiche message d'erreur si besoin
+*/
+function checkDate() {
+
+	const date = birthdateField.value.split("-"); //split autour des - et retourne un tableau avec chaque élémént
+	const year = parseInt(date[0]); // l'année
+	const month = parseInt(date[1]); // le mois
+	const day = parseInt(date[2]); // le jour
+
+	// Récupère l'année, le mois et le jour en cours
+	const dateCurrent = new Date();
+	const yearCurrent = dateCurrent.getFullYear();
+	const monthNow = dateCurrent.getMonth(); //+1 à rajouter car démarre à 0
+	const monthCurrent = monthNow + 1;
+	const dayCurrent = dateCurrent.getDate();
 	
-		// Si l'utilisateur a - de 12 ans et + de 99 ans
+	// calcul de l'age
+	const age = yearCurrent - year;
+	
+	// si année de naissance postérieure à année en cours = impossible
+	if (year > yearCurrent) {
+		document.getElementById("error-birthdate").innerHTML = "Il y a une erreur, cette date n'existe pas encore";
+	
+	// si année de naissance inférieure à année en cours
+	} else if (year < yearCurrent) {
+		// si moins de 12 ans = impossible
 		if (age  < 12) {
 			document.getElementById("error-birthdate").innerHTML = "Vous devez avoir au moins 12 ans pour vous inscrire";
+		// si plus de 99 ans = impossible
 		}	else if (age > 99) {
 			document.getElementById("error-birthdate").innerHTML = "Vous devez avoir entre 12 et 99 ans pour vous inscrire";
-		} 
-
-		// si l'utilisateur renseigne une année postérieure à l'année actuelle
-		if (year > yearCurrent) {
-			document.getElementById("error-birthdate").innerHTML = "Il y a une erreur sur la date";
-			// si même année renseignée et mois supérieur
-		} else if(year === yearCurrent && month > monthCurrent ){
-			//si jour supérieur
+		// si + de 12 ans et - de 99 = ok
+		} else {
+			document.getElementById("error-birthdate").innerHTML = "";
+			return true;
+		}
+	// si année de naissance égale à l'année en cours = impossible car - de 12 ans mais gestion des messages d'erreur
+	} else if (year === yearCurrent) {
+		// si mois de naissance inférieur à mois courant = il faut avoir 12 ans
+		if (month < monthCurrent) {
+			document.getElementById("error-birthdate").innerHTML = "Vous devez avoir au moins 12 ans pour vous inscrire";
+		// si mois de naissance supérieur à mois courant = impossible
+		} else if ( month > monthCurrent) {
+			document.getElementById("error-birthdate").innerHTML = "Il y a une erreur, cette date n'existe pas encore";
+		// si mois égal 
+		} else if (month === monthCurrent) {
+			// si jour de naissance supérieur au jour actuel = erreur
 			if (day >= dayCurrent) {
-				document.getElementById("error-birthdate").innerHTML = "Il y a une erreur sur la date";
+				document.getElementById("error-birthdate").innerHTML = "Il y a une erreur, cette date n'existe pas encore";
+			// si jour de naissance inférieur au jour actuel = il faut avoir 12 ans
+			} else {
+				document.getElementById("error-birthdate").innerHTML = "Vous devez avoir au moins 12 ans pour vous inscrire";
 			}
 		}
-
-		return true;
 	}
 }
 
@@ -227,6 +253,7 @@ function verifyForm() {
 	checkLastname();
 	checkEmail();
 	checkBirthdate();
+	checkDate();
 	checkNumberTournament();
 	checkCity();
 	checkCheckBox();
