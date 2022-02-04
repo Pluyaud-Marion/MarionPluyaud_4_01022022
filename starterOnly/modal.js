@@ -27,7 +27,6 @@ const regexName = /^[a-zA-ZÀ-ÿ\s_-]{2,60}$/;
 const regexEmail = /^[^@\s]{2,30}@[^@\s]{2,30}\.[^@\s]{2,5}$/;
 const regexNumber = /^[0-9]+$/;
 
-main();
 
 /*
 ------------- Fonction principale ---------------
@@ -46,6 +45,8 @@ function main() {
 		submitForm();
 	});
 }
+
+main();
 
 /*
 ------------- Fonctions ---------------
