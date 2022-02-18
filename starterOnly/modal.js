@@ -55,7 +55,7 @@ main();
 
 
 function editNav() {
-	var x = document.getElementById("myTopnav");
+	const x = document.getElementById("myTopnav");
 	if (x.className === "topnav") {
 		x.className += " responsive";
 	} else {
@@ -78,18 +78,25 @@ function closeModal() {
 fonction qui check tous les champs => si tous les champs sont ok, envoi le formulaire et fait afficher message confirmation (+ gestion fermeture de la confirmation au click sur bouton)
 */
 function submitForm() {
-	for (button of buttonsRadio) {
-		//Si tous les champs sont ok
-		if (checkFirstname() && checkLastname() && checkEmail() && checkBirthdate() && checkDate() && checkNumberTournament() && checkCheckBox() && checkCity()) {
-			//on remplace le contenu de la div .modal par le texte
-			document.querySelector(".modal").innerHTML = "Merci, votre réservation a bien été reçue!";
-			// on remplace la valeur du bouton "c'est parti" par "j'ai compris"
-			buttonSendForm.value = "Fermer";
+	//for (const button of buttonsRadio) {
+	//Si tous les champs sont ok
+	if (checkFirstname() && 
+	checkLastname() && 
+	checkEmail() && 
+	checkBirthdate() && 
+	checkDate() && 
+	checkNumberTournament() && 
+	checkCheckBox() && 
+	checkCity()) {
+		//on remplace le contenu de la div .modal par le texte
+		document.querySelector(".modal").innerHTML = "Merci, votre réservation a bien été reçue!";
+		// on remplace la valeur du bouton "c'est parti" par "j'ai compris"
+		buttonSendForm.value = "Fermer";
 			
-			//au click sur le bouton on appelle la fonction pour fermer la modale
-			buttonSendForm.addEventListener("click", closeModal);
-		}
+		//au click sur le bouton on appelle la fonction pour fermer la modale
+		buttonSendForm.addEventListener("click", closeModal);
 	}
+	//}
 }
 
 /*

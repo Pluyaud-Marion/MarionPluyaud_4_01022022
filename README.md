@@ -25,3 +25,5 @@ Site compatibles différents navigateurs :
 - Chrome
 - Firefox
 - Safari
+
+Site passé avec succès au validateur W3C HTML/CSS
