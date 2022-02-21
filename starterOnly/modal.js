@@ -78,7 +78,6 @@ function closeModal() {
 fonction qui check tous les champs => si tous les champs sont ok, envoi le formulaire et fait afficher message confirmation (+ gestion fermeture de la confirmation au click sur bouton)
 */
 function submitForm() {
-	//for (const button of buttonsRadio) {
 	//Si tous les champs sont ok
 	if (checkFirstname() && 
 	checkLastname() && 
@@ -96,7 +95,6 @@ function submitForm() {
 		//au click sur le bouton on appelle la fonction pour fermer la modale
 		buttonSendForm.addEventListener("click", closeModal);
 	}
-	//}
 }
 
 /*
