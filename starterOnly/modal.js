@@ -52,8 +52,6 @@ main();
 ------------- Fonctions ---------------
 */
 
-
-
 function editNav() {
 	const x = document.getElementById("myTopnav");
 	if (x.className === "topnav") {
@@ -89,7 +87,7 @@ function submitForm() {
 	checkCity()) {
 		//on remplace le contenu de la div .modal par le texte
 		document.querySelector(".modal").innerHTML = "Merci, votre réservation a bien été reçue!";
-		// on remplace la valeur du bouton "c'est parti" par "j'ai compris"
+		// on remplace la valeur du bouton "c'est parti" par "Fermer"
 		buttonSendForm.value = "Fermer";
 			
 		//au click sur le bouton on appelle la fonction pour fermer la modale
@@ -103,7 +101,7 @@ fonction qui check le champ firstname et affiche les messages d'erreurs si besoi
 function checkFirstname() {
 	if (firstnameField.value === "") {
 		document.getElementById("error-firstname").innerHTML = "Ce champ doit être rempli";
-	} else if (!regexName.test(firstnameField.value)) {
+	} else if (!regexName.test(firstnameField.value.trim())) {
 		document.getElementById("error-firstname").innerHTML = "Format incorrect, vous devez renseigner au moins 2 caractères";
 	} else {
 		document.getElementById("error-firstname").innerHTML = "";
@@ -117,7 +115,7 @@ fonction qui check le champ lastname et affiche les messages d'erreurs si besoin
 function checkLastname() {
 	if (lastnameField.value === "") {
 		document.getElementById("error-lastname").innerHTML = "Ce champ doit être rempli";
-	} else if (!regexName.test(lastnameField.value)) {
+	} else if (!regexName.test(lastnameField.value.trim())) {
 		document.getElementById("error-lastname").innerHTML = "Format incorrect, vous devez renseigner au moins 2 caractères";
 	} else {
 		document.getElementById("error-lastname").innerHTML = "";
@@ -131,7 +129,7 @@ fonction qui check le champ email et affiche les messages d'erreurs si besoin
 function checkEmail() {
 	if (emailField.value === "") {
 		document.getElementById("error-email").innerHTML = "Ce champ doit être rempli";
-	} else if (!regexEmail.test(emailField.value)) {
+	} else if (!regexEmail.test(emailField.value.trim())) {
 		document.getElementById("error-email").innerHTML = "Votre adresse mail n'est pas valide";
 	} else {
 		document.getElementById("error-email").innerHTML = "";
